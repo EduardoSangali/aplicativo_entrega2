@@ -9,7 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedimento>): ArrayAdapter<Procedimento>(ctx, ressource, Item) {
+class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedimento>):
+    ArrayAdapter<Procedimento>(ctx, ressource, Item) {
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

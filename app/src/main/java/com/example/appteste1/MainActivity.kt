@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+/*
         //LISTA DE ITENS DA HOME
         val Items = ArrayList<Procedimento>()
         Items.add(Procedimento("23/04/21 - 14:00", "Fisioterapia",
@@ -109,12 +110,13 @@ class MainActivity : AppCompatActivity() {
 
         //Create listview and array adapter
         val listView = findViewById<ListView>(R.id.listview)
+        intent
         val adapter = MyAdapter(this,R.layout.list_item,Items)
         listView.adapter = adapter
 
         listView.setOnItemClickListener { adapter, view, i, l ->
             Toast.makeText(this, "Você clicou em ${Items[i].procedim}", Toast.LENGTH_SHORT).show()
         }
-
+*/
     }
 }

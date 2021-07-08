@@ -238,15 +238,15 @@ class HomeFragment : Fragment() {
         val adapter = MyAdapter(requireContext(), R.layout.list_item, Items)
         listView.adapter = adapter
 
-        listView.setOnItemClickListener { listView, view, i, l ->
+
+       /* listView.setOnItemClickListener { listView, view, i, l ->
             Toast.makeText(requireContext(), "Você clicou em ${Items[i].procedim}", Toast.LENGTH_SHORT).show()
-        }
-
-
+        }*/
 
         return root
 
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

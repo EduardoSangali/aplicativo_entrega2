@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 
 class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedimento>):
     ArrayAdapter<Procedimento>(ctx, ressource, Item) {

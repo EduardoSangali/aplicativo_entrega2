@@ -30,6 +30,11 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+/*
+        val textView: TextView = binding.txtDashboard
+        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+            textView.text = it
+        })*/
 
 
         return root

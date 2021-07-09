@@ -3,4 +3,18 @@
     <string name="title_home">Agendamentos</string>
     <string name="title_dashboard">Paciente</string>
     <string name="title_notifications">Contato</string>
+    
+    <string-array name="especialidades">
+        <item>Fisioterapia</item>
+        <item>Personal Trainer</item>
+        <item>Psicólogo</item>
+    </string-array>
+
+    <string-array name="profissional">
+        <item>Ana</item>
+        <item>Jorge</item>
+        <item>Pedro</item>
+    </string-array>
+
+
 </resources>

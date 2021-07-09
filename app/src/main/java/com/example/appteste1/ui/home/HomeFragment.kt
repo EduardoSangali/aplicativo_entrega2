@@ -243,6 +243,10 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), "Você clicou em ${Items[i].procedim}", Toast.LENGTH_SHORT).show()
         }*/
 
+        fun clicado(){
+            Toast.makeText(requireContext(), "Vocêdasfsdfsd ", Toast.LENGTH_SHORT).show()
+        }
+
         return root
 
     }

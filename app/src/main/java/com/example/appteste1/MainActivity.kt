@@ -7,12 +7,15 @@ import android.widget.ListView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.appteste1.databinding.ActivityMainBinding
+import com.example.appteste1.databinding.FragmentHomeBinding
 import com.example.appteste1.ui.home.HomeViewModel
+import com.example.appteste1.ui.notifications.NotificationsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,22 +39,16 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_dashboard
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        binding.floatingActionButton.setOnClickListener(View.OnClickListener {
-
-            //val intent = Intent(this, com.example.appteste1.MainActivity::class.java)
-// To pass any data to next activity
-        //   intent.putExtra("", value)
-// start your next activity
-
-        })
 
 
     }
+
+
 
 }

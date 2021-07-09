@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".ui.paciente.FragmentoPaciente">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:text="Inclusão de Agendamento"
+            android:text="Inclusão de Paciente"
             android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,104 +42,124 @@
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <Spinner
-        android:id="@+id/spinner2"
+    <EditText
+        android:id="@+id/nome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/drop_down_bg"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:fontFamily="sans-serif"
-        android:text="Procedimento"
-        android:textColor="@color/topo"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner2"
-        app:layout_constraintStart_toStartOf="@+id/spinner2"
-        app:layout_constraintTop_toTopOf="@+id/spinner2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Spinner
-        android:id="@+id/spinner3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/drop_down_bg"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2"
-        tools:layout_editor_absoluteX="-16dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:fontFamily="sans-serif"
-        android:text="Profissional"
-        android:textColor="@color/topo"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner3"
-        app:layout_constraintStart_toStartOf="@+id/spinner3"
-        app:layout_constraintTop_toTopOf="@+id/spinner3"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/pickDateBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/drop_down_bg"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
-
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:fontFamily="sans-serif"
-        android:text="Data e Hora"
-        android:textColor="@color/topo"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/pickDateBtn"
-        app:layout_constraintStart_toStartOf="@+id/pickDateBtn"
-        app:layout_constraintTop_toTopOf="@+id/pickDateBtn"
-        app:layout_constraintVertical_bias="0.0" />
-    <TextView
-        android:id="@+id/mostraDataHora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginBottom="29dp"
-        android:text=""
+        android:inputType="text"
         android:fontFamily="sans-serif-medium"
         android:textColor="#737373"
         android:textSize="22dp"
-        app:layout_constraintBottom_toBottomOf="@+id/pickDateBtn"
-        app:layout_constraintStart_toStartOf="@+id/pickDateBtn"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:paddingLeft="11dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drop_down_bg"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="-16dp" />
 
-    <ImageView
-        android:id="@+id/listInfo"
+
+    <TextView
+        android:id="@+id/txtNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Nome"
+        android:textColor="@color/topo"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/nome"
+        app:layout_constraintStart_toStartOf="@+id/nome"
+        app:layout_constraintTop_toTopOf="@+id/nome"
+        app:layout_constraintVertical_bias="0.0" />
+    <EditText
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteY="368dp"
+        android:id="@+id/idade"
+        android:paddingLeft="11dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#737373"
+        android:textSize="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drop_down_bg"
+        app:layout_constraintTop_toBottomOf="@+id/nome"
+        tools:layout_editor_absoluteX="0dp" />
 
-        android:layout_alignParentRight="true"
-        android:padding="13dp"
-        android:src="@drawable/calendar"
-        app:layout_constraintBottom_toBottomOf="@+id/pickDateBtn"
-        app:layout_constraintEnd_toEndOf="@+id/pickDateBtn"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3"></ImageView>
+
+    <TextView
+        android:id="@+id/txtIdade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Idade"
+        android:textColor="@color/topo"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/idade"
+        app:layout_constraintStart_toStartOf="@+id/idade"
+        app:layout_constraintTop_toTopOf="@+id/idade"
+        app:layout_constraintVertical_bias="0.0" />
+    <EditText
+        android:ems="10"
+        android:inputType="phone"
+        tools:layout_editor_absoluteY="368dp"
+        android:id="@+id/telefone"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#737373"
+        android:paddingLeft="11dp"
+        android:textSize="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drop_down_bg"
+        app:layout_constraintTop_toBottomOf="@+id/idade"
+        tools:layout_editor_absoluteX="-16dp" />
+
+    <TextView
+        android:id="@+id/txtTelefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Telefone"
+        android:textColor="@color/topo"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/telefone"
+        app:layout_constraintStart_toStartOf="@+id/telefone"
+        app:layout_constraintTop_toTopOf="@+id/telefone"
+        app:layout_constraintVertical_bias="0.0" />
+    <EditText
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteY="368dp"
+        android:id="@+id/email"
+        android:paddingLeft="11dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#737373"
+        android:textSize="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drop_down_bg"
+        app:layout_constraintTop_toBottomOf="@+id/telefone"
+        tools:layout_editor_absoluteX="-16dp"
+        />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Email"
+        android:textColor="@color/topo"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toTopOf="@+id/email"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/deletar"
@@ -150,7 +170,7 @@
         android:text="Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/enviar"
-        app:layout_constraintTop_toBottomOf="@+id/pickDateBtn"
+        app:layout_constraintTop_toBottomOf="@+id/email"
         />
 
     <Button
@@ -162,7 +182,7 @@
         android:text="Salvar"
         app:layout_constraintEnd_toStartOf="@+id/deletar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickDateBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
 
 

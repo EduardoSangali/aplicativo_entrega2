@@ -12,13 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.appteste1.R
 import com.example.appteste1.databinding.FragmentHomeBinding
 import android.widget.ListView
-import com.example.appteste1.MyAdapter
 import android.widget.Toast
 import android.content.Intent
 
 import android.R.attr.button
 import android.R.attr.fragment
 import androidx.navigation.fragment.findNavController
+import com.example.appteste1.ui.notifications.NotificationsFragment
 
 class HomeFragment : Fragment() {
 
@@ -246,10 +246,21 @@ class HomeFragment : Fragment() {
        /* listView.setOnItemClickListener { listView, view, i, l ->
             Toast.makeText(requireContext(), "Você clicou em ${Items[i].procedim}", Toast.LENGTH_SHORT).show()
         }*/
+        binding.floatingActionButton.setOnClickListener(View.OnClickListener {
+             replaceTest(NotificationsFragment())
+        })
 
 
 
         return root
+
+    }
+    private fun replaceTest(fragment: Fragment) {
+
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main,fragment)
+        fragmentTransaction.commit()
 
     }
 

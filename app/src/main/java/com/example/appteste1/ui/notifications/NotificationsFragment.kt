@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.appteste1.R
 import com.example.appteste1.databinding.FragmentNotificationsBinding
+import com.example.appteste1.ui.home.HomeFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -103,8 +104,22 @@ class NotificationsFragment : Fragment() {
             binding.spinner3.setAdapter(null)
             binding.mostraDataHora.setText("")
         }
+
+        binding.backIcon.setOnClickListener(View.OnClickListener {
+            replaceView(HomeFragment())
+        })
         return root
     }
+
+    private fun replaceView(fragment: Fragment) {
+
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main,fragment)
+        fragmentTransaction.commit()
+
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

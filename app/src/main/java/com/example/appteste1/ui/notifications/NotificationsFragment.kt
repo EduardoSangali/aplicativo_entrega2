@@ -70,7 +70,6 @@ class NotificationsFragment : Fragment() {
 
 
         val mPickTimeBtn = binding.pickDateBtn
-        val textView     = binding.dateTv
 
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -81,7 +80,7 @@ class NotificationsFragment : Fragment() {
 
             val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in TextView
-                textView.setText("" + dayOfMonth + " " + month + ", " + year)
+                mPickTimeBtn.text = ("" + dayOfMonth + " " + month + ", " + year)
             }, year, month, day)
             dpd.show()
 

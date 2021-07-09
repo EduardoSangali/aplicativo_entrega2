@@ -26,6 +26,7 @@ class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedi
         val editProced: ImageView = view.findViewById<ImageView>(R.id.listEdit)
         val delProced: ImageView = view.findViewById<ImageView>(R.id.listDelete)
 
+
         //Set items
         dataProced.text = Item[position].dataHora
         nomeProced.text = Item[position].procedim

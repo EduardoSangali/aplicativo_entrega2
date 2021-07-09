@@ -1,5 +1,6 @@
 package com.example.appteste1.ui.home
 
+import android.R.attr
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,13 @@ import com.example.appteste1.databinding.FragmentHomeBinding
 import android.widget.ListView
 import com.example.appteste1.MyAdapter
 import android.widget.Toast
+import android.content.Intent
+
+
+import android.R.attr.button
+
+
+
 
 
 
@@ -243,9 +251,13 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), "Você clicou em ${Items[i].procedim}", Toast.LENGTH_SHORT).show()
         }*/
 
-        fun clicado(){
-            Toast.makeText(requireContext(), "Vocêdasfsdfsd ", Toast.LENGTH_SHORT).show()
+        val fab: View = binding.floatingActionButton2
+        fab.setOnClickListener { view ->
+
+
         }
+
+
 
         return root
 

@@ -17,6 +17,8 @@ import android.widget.Toast
 import android.content.Intent
 
 import android.R.attr.button
+import android.R.attr.fragment
+import androidx.navigation.fragment.findNavController
 
 class HomeFragment : Fragment() {
 
@@ -244,13 +246,6 @@ class HomeFragment : Fragment() {
        /* listView.setOnItemClickListener { listView, view, i, l ->
             Toast.makeText(requireContext(), "Você clicou em ${Items[i].procedim}", Toast.LENGTH_SHORT).show()
         }*/
-
-
-
-        val fab: View = binding.floatingActionButton2
-        fab.setOnClickListener { view ->
-
-        }
 
 
 

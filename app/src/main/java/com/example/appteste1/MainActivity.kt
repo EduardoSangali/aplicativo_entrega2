@@ -1,6 +1,8 @@
 package com.example.appteste1
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ListView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.appteste1.databinding.ActivityMainBinding
+import com.example.appteste1.ui.home.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +41,15 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        binding.floatingActionButton.setOnClickListener(View.OnClickListener {
+
+            //val intent = Intent(this, com.example.appteste1.MainActivity::class.java)
+// To pass any data to next activity
+        //   intent.putExtra("", value)
+// start your next activity
+
+        })
 
 
     }

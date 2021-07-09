@@ -44,48 +44,90 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_baseline_add_24"
-        app:tint="@color/white"
-        app:backgroundTint="#3B8ACE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Spinner
         android:id="@+id/spinner2"
-        android:background="@drawable/drop_down_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/drop_down_bg"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:layout_editor_absoluteX="0dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Procedimento"
+        android:textColor="#A3A3A3"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner2"
+        app:layout_constraintStart_toStartOf="@+id/spinner2"
+        app:layout_constraintTop_toTopOf="@+id/spinner2"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Spinner
         android:id="@+id/spinner3"
-        android:background="@drawable/drop_down_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/drop_down_bg"
         app:layout_constraintTop_toBottomOf="@+id/spinner2"
         tools:layout_editor_absoluteX="-16dp" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Profissional"
+        android:textColor="#A3A3A3"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner3"
+        app:layout_constraintStart_toStartOf="@+id/spinner3"
+        app:layout_constraintTop_toTopOf="@+id/spinner3"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/pickDateBtn"
-        android:background="@drawable/drop_down_bg"
         android:layout_width="match_parent"
-        android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:text="Pick Date"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3"
-/>
+        android:background="@drawable/drop_down_bg"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
 
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Data e Hora"
+        android:textColor="#A3A3A3"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pickDateBtn"
+        app:layout_constraintStart_toStartOf="@+id/pickDateBtn"
+        app:layout_constraintTop_toTopOf="@+id/pickDateBtn"
+        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/mostraDataHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginBottom="29dp"
+        android:text=""
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#737373"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pickDateBtn"
+        app:layout_constraintStart_toStartOf="@+id/pickDateBtn"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <ImageView
         android:id="@+id/listInfo"
@@ -99,27 +141,28 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner3"></ImageView>
 
     <Button
-        android:id="@+id/enviar"
-        android:layout_width="wrap_content"
+        android:id="@+id/deletar"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="@color/topo"
         android:text="Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/deletar"
-        app:layout_constraintTop_toBottomOf="@+id/pickDateBtn" />
+        app:layout_constraintStart_toEndOf="@+id/enviar"
+        app:layout_constraintTop_toBottomOf="@+id/pickDateBtn"
+        />
 
     <Button
-        android:id="@+id/deletar"
-        android:layout_width="wrap_content"
+        android:id="@+id/enviar"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-
+        android:layout_marginTop="48dp"
         android:backgroundTint="@color/topo"
         android:text="Salvar"
-        app:layout_constraintEnd_toStartOf="@+id/enviar"
+        app:layout_constraintEnd_toStartOf="@+id/deletar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickDateBtn" />
+
 
 
 

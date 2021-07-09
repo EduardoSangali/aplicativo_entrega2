@@ -5,12 +5,14 @@
     <string name="title_notifications">Contato</string>
     
     <string-array name="especialidades">
+        <item></item>
         <item>Fisioterapia</item>
         <item>Personal Trainer</item>
         <item>Psicólogo</item>
     </string-array>
 
     <string-array name="profissional">
+        <item></item>
         <item>Ana</item>
         <item>Jorge</item>
         <item>Pedro</item>

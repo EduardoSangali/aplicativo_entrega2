@@ -1,20 +1,19 @@
 package com.example.appteste1.ui.notifications
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.appteste1.R
 import com.example.appteste1.databinding.FragmentNotificationsBinding
-import com.example.appteste1.ui.home.MyAdapter
-import com.example.appteste1.ui.home.Procedimento_
 import java.text.SimpleDateFormat
-import java.time.Month
 import java.util.*
 
 class NotificationsFragment : Fragment() {
@@ -48,10 +47,11 @@ class NotificationsFragment : Fragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.especialidades,
-            android.R.layout.simple_spinner_dropdown_item
+            R.layout.color_spinner_layout,
+
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
@@ -60,32 +60,49 @@ class NotificationsFragment : Fragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.profissional,
-            android.R.layout.simple_spinner_item
+            R.layout.color_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
             // Apply the adapter to the spinner
             spinner3.adapter = adapter
         }
 
 
         val mPickTimeBtn = binding.pickDateBtn
+        val cancelBtn = binding.deletar
 
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
+        val hour = c.get(Calendar.HOUR)
+        val minute = c.get(Calendar.MINUTE)
 
         mPickTimeBtn.setOnClickListener {
 
             val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in TextView
-                mPickTimeBtn.text = ("" + dayOfMonth + " " + month + ", " + year)
-            }, year, month, day)
+                binding.mostraDataHora.text = ("" + dayOfMonth + "/" + month + "/" + year)
+            }, year, month, day )
+
+
+            val dph = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                c.set(Calendar.HOUR_OF_DAY, hour)
+                c.set(Calendar.MINUTE, minute)
+                binding.mostraDataHora.append(SimpleDateFormat(" HH:mm").format(c.time))
+            }
+            TimePickerDialog(requireContext(), dph, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show()
+
             dpd.show()
 
         }
 
+        cancelBtn.setOnClickListener(){
+            binding.spinner2.setAdapter(null)
+            binding.spinner3.setAdapter(null)
+            binding.mostraDataHora.setText("")
+        }
         return root
     }
 

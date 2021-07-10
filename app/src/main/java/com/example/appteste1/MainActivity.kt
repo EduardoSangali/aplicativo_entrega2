@@ -2,27 +2,25 @@ package com.example.appteste1
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ListView
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.appteste1.databinding.ActivityMainBinding
-import com.example.appteste1.databinding.FragmentHomeBinding
-import com.example.appteste1.ui.home.HomeViewModel
-import com.example.appteste1.ui.notifications.NotificationsFragment
+import com.example.appteste1.ui.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+        //auth.signOut();
 
         try {
             this.supportActionBar?.hide()
@@ -44,11 +42,15 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
-
     }
 
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
 
-
+        if(currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+    }
 }

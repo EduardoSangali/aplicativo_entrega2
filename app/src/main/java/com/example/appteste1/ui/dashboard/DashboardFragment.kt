@@ -99,6 +99,24 @@ class DashboardFragment : Fragment() {
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
+        Items.add(
+            Procedimento_(
+                "", "",
+                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
+            )
+        )
+        Items.add(
+            Procedimento_(
+                "", "",
+                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
+            )
+        )
+        Items.add(
+            Procedimento_(
+                "", "",
+                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
+            )
+        )
 
 
         val listView: ListView = binding.listview

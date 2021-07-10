@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "634120282406",
+    "firebase_url": "https://clintech-37642-default-rtdb.firebaseio.com",
+    "project_id": "clintech-37642",
+    "storage_bucket": "clintech-37642.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634120282406:android:3c7de306bc5a7a99cd21e7",
+        "android_client_info": {
+          "package_name": "br.com.fiap.clintech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634120282406-v3t9kcpqv22mgsvbgsgj7vepu0kre7bd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6AhM6qfhydMHjvYsy8rVIxiQswSv3CJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634120282406-v3t9kcpqv22mgsvbgsgj7vepu0kre7bd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634120282406:android:23a53503459b0526cd21e7",
+        "android_client_info": {
+          "package_name": "com.example.appteste1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634120282406-v3t9kcpqv22mgsvbgsgj7vepu0kre7bd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6AhM6qfhydMHjvYsy8rVIxiQswSv3CJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634120282406-v3t9kcpqv22mgsvbgsgj7vepu0kre7bd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634120282406:android:bd0a59c4071b9a2ccd21e7",
+        "android_client_info": {
+          "package_name": "com.example.firebasedemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634120282406-v3t9kcpqv22mgsvbgsgj7vepu0kre7bd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6AhM6qfhydMHjvYsy8rVIxiQswSv3CJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634120282406-v3t9kcpqv22mgsvbgsgj7vepu0kre7bd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

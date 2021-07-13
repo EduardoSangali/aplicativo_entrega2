@@ -26,6 +26,7 @@ private const val ARG_PARAM2 = "param2"
 class FragmentoPaciente : Fragment() {
 
     private lateinit var fragmentoPacienteViewModel: FragmentoPacienteViewModel
+    private lateinit var repository: PacienteRepository
     private var _binding: FragmentFragmentoPacienteBinding? = null
 
     // This property is only valid between onCreateView and
@@ -41,7 +42,11 @@ class FragmentoPaciente : Fragment() {
         _binding = FragmentFragmentoPacienteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        repository = PacienteRepository()
+        repository.initializeDbRef()
+
         val cancelBtn = binding.deletar
+        val salvarBtn = binding.enviar
 
         val nome: EditText = binding.nome
         val idade: EditText = binding.idade
@@ -52,9 +57,18 @@ class FragmentoPaciente : Fragment() {
             nome.setText("")
             idade.setText("")
             telefone.setText("")
-           email.setText("")
+            email.setText("")
         }
 
+        salvarBtn.setOnClickListener(){
+            var paciente = Paciente(nome.getText().toString(),
+                idade.getText().toString(),
+                telefone.getText().toString(),
+                email.getText().toString(),
+                "54265879541")
+
+            repository.insert(paciente)
+        }
         binding.backIcon.setOnClickListener(View.OnClickListener {
             replaceView(DashboardFragment())
         })

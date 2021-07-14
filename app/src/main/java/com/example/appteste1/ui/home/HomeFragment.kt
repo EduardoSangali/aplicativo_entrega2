@@ -45,219 +45,166 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val Items = ArrayList<Procedimento_>()
+
+
         Items.add(
             Procedimento_(
+                "645644645",
                 "23/04/21 - 14:00", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "26/04/21 - 10:15", "Psicólogo",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "12/05/21 - 11:45", "Personal Trainer",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "25/05/21 - 08:15", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "01/06/21 - 16:15", "Pilates",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "10/06/21 - 12:45", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "29/07/21 - 08:30", "Psicólogo",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "30/07/21 - 11:15", "Personal Trainer",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "23/04/21 - 14:00", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "26/04/21 - 10:15", "Psicólogo",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "12/05/21 - 11:45", "Personal Trainer",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "25/05/21 - 08:15", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "01/06/21 - 16:15", "Pilates",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "10/06/21 - 12:45", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "29/07/21 - 08:30", "Psicólogo",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "30/07/21 - 11:15", "Personal Trainer",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "23/04/21 - 14:00", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "26/04/21 - 10:15", "Psicólogo",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "12/05/21 - 11:45", "Personal Trainer",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "25/05/21 - 08:15", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "01/06/21 - 16:15", "Pilates",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
             )
         )
         Items.add(
             Procedimento_(
+                "645644645",
                 "10/06/21 - 12:45", "Fisioterapia",
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "29/07/21 - 08:30", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "30/07/21 - 11:15", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "23/04/21 - 14:00", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "26/04/21 - 10:15", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "12/05/21 - 11:45", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "25/05/21 - 08:15", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "01/06/21 - 16:15", "Pilates",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "10/06/21 - 12:45", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "29/07/21 - 08:30", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "30/07/21 - 11:15", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "", "",
-                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "", "",
-                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "", "",
-                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
             )
         )
 
+
         val listView: ListView = binding.listview
-        val adapter = MyAdapter(requireContext(), R.layout.list_item, Items)
+        val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, true, true)
         listView.adapter = adapter
 
 

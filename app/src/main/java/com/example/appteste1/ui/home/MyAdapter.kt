@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.appteste1.R
 
-class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedimento_>):
+class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedimento_>, var hasInfo: Boolean, var hasEdit: Boolean, var hasDel: Boolean):
                 ArrayAdapter<Procedimento_>(ctx, ressource, Item) {
 
 
@@ -27,27 +27,31 @@ class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedi
         val editProced: ImageView = view.findViewById<ImageView>(R.id.listEdit)
         val delProced: ImageView = view.findViewById<ImageView>(R.id.listDelete)
 
-
-        infoProced.setOnClickListener(){
-            Toast.makeText(ctx, "Clicado em Informações", Toast.LENGTH_SHORT).show()
-        }
-
-        editProced.setOnClickListener(){
-            Toast.makeText(ctx, "Clicado em Alterar", Toast.LENGTH_SHORT).show()
-        }
-
-        delProced.setOnClickListener(){
-            Toast.makeText(ctx, "Clicado em Deletar", Toast.LENGTH_SHORT).show()
-        }
-
-
         //Set items
         dataProced.text = Item[position].dataHora
         nomeProced.text = Item[position].procedim
-        infoProced.setImageDrawable(ctx.resources.getDrawable(Item[position].infoId))
-        editProced.setImageDrawable(ctx.resources.getDrawable(Item[position].editId))
-        delProced.setImageDrawable(ctx.resources.getDrawable(Item[position].delId))
 
+        if(hasInfo) {
+            infoProced.setOnClickListener(){
+                Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        if(hasEdit) {
+            editProced.setOnClickListener(){
+                Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        if(hasDel) {
+            delProced.setOnClickListener(){
+                Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        infoProced.setImageDrawable(ctx.resources.getDrawable(Item[position].infoId))
+        editProced.setImageDrawable(Item[position].editId?.let { ctx.resources.getDrawable(it) })
+        delProced.setImageDrawable(Item[position].delId?.let { ctx.resources.getDrawable(it) })
 
 
         return view

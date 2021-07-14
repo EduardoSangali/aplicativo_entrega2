@@ -39,98 +39,26 @@ class DashboardFragment : Fragment() {
 
 
         val Items = ArrayList<Procedimento_>()
+
         Items.add(
             Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
+                "645644645",
+                "23/04/21 - 14:00", "Fisioterapia",
+                R.drawable.list_info, null, null
             )
         )
         Items.add(
             Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "Caio Costa", "(11) 3210-1234",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "", "",
-                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "", "",
-                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "", "",
-                R.drawable.vazio, R.drawable.vazio, R.drawable.vazio
+                "645644645",
+                "26/04/21 - 10:15", "Psicólogo",
+                R.drawable.list_info, null, null
             )
         )
 
 
         val listView: ListView = binding.listview
-        val adapter = MyAdapter(requireContext(), R.layout.list_item, Items)
+        val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, false, false)
         listView.adapter = adapter
-
-        binding.floatingActionButton2.setOnClickListener(View.OnClickListener {
-            replaceView(FragmentoPaciente())
-        })
-        binding.backIcon.setOnClickListener(View.OnClickListener {
-            replaceView(HomeFragment())
-        })
-
-
 
         return root
     }

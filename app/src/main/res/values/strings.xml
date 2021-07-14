@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">App Domiciliar</string>
     <string name="title_home">Agendamentos</string>
-    <string name="title_dashboard">Paciente</string>
+    <string name="title_dashboard">Histórico</string>
     <string name="title_notifications">Contato</string>
 
     <string-array name="especialidades">

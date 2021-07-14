@@ -21,6 +21,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
 
+        try {
+            this.supportActionBar?.hide()
+        } catch (e: NullPointerException) {
+        }
+
         var btn_log_in: Button = findViewById<Button>(R.id.btn_log_in)
         btn_log_in.setOnClickListener {
             doLogin()
@@ -56,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     updateUI(user)
                 } else {
-
                     updateUI(null)
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.appteste1.ui.paciente
+package com.example.appteste1.model.paciente
 
 import com.google.firebase.database.IgnoreExtraProperties
 
@@ -9,4 +9,6 @@ data class Paciente(
     var telefone: String,
     var email: String,
     val documento: String
-)
+){
+    constructor() : this("","","","","")
+}

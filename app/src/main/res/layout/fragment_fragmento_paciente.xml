@@ -161,6 +161,37 @@
         app:layout_constraintTop_toTopOf="@+id/email"
         app:layout_constraintVertical_bias="0.0" />
 
+    <EditText
+        android:ems="10"
+        android:inputType="text"
+        tools:layout_editor_absoluteY="368dp"
+        android:id="@+id/personalID"
+        android:paddingLeft="11dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#737373"
+        android:textSize="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drop_down_bg"
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        tools:layout_editor_absoluteX="-16dp"
+        />
+
+    <TextView
+        android:id="@+id/txtPersonalID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:fontFamily="sans-serif"
+        android:text="Documento"
+        android:textColor="@color/topo"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/personalID"
+        app:layout_constraintStart_toStartOf="@+id/personalID"
+        app:layout_constraintTop_toTopOf="@+id/personalID"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/deletar"
         android:layout_width="150dp"
@@ -170,7 +201,7 @@
         android:text="Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/enviar"
-        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/personalID"
         />
 
     <Button
@@ -182,7 +213,7 @@
         android:text="Salvar"
         app:layout_constraintEnd_toStartOf="@+id/deletar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/personalID" />
 
 
 

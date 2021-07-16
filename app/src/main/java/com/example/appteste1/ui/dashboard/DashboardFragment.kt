@@ -1,6 +1,7 @@
 package com.example.appteste1.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,18 @@ import com.example.appteste1.databinding.FragmentDashboardBinding
 
 
 import android.widget.ListView
-import com.example.appteste1.ui.home.HomeFragment
+import com.example.appteste1.model.Agendamento
 import com.example.appteste1.ui.home.MyAdapter
-import com.example.appteste1.ui.home.Procedimento_
-import com.example.appteste1.ui.paciente.FragmentoPaciente
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var database: DatabaseReference
+
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
@@ -36,9 +41,33 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val allAppointments = ArrayList<Agendamento>()
 
+        // get a reference of the database object
+        database = Firebase.database.reference
+        database.child("agendamentos").get().addOnSuccessListener{
+            Log.i("firebase", "Value: " + it.value)
 
-        val Items = ArrayList<Procedimento_>()
+            //create a generic type to be used to extract the data from Firebase
+            val genericTypeIndicator: GenericTypeIndicator<Map<String, Agendamento>> =
+                object : GenericTypeIndicator<Map<String, Agendamento>>() {}
+
+            //The getValue method will convert the JSON string to a hashmap
+            val hashMap: Map<String, Agendamento>? = it.getValue(genericTypeIndicator)
+            if (hashMap != null) {
+                //loop over the map items and add
+                for ((_, agendamento) in hashMap) {
+                    allAppointments.add(agendamento)
+                }
+            }
+
+            val listView: ListView = binding.listview
+            //val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, false, false)
+            val adapter = MyAdapter(requireContext(), R.layout.list_item, allAppointments, true, false, false)
+            listView.adapter = adapter
+        }
+
+        /*val Items = ArrayList<Procedimento_>()
 
         Items.add(
             Procedimento_(
@@ -58,7 +87,7 @@ class DashboardFragment : Fragment() {
 
         val listView: ListView = binding.listview
         val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, false, false)
-        listView.adapter = adapter
+        listView.adapter = adapter*/
 
         return root
     }

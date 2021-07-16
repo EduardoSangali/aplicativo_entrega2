@@ -10,9 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.appteste1.R
+import com.example.appteste1.model.Agendamento
 
-class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Procedimento_>, var hasInfo: Boolean, var hasEdit: Boolean, var hasDel: Boolean):
-                ArrayAdapter<Procedimento_>(ctx, ressource, Item) {
+class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Agendamento>, var hasInfo: Boolean, var hasEdit: Boolean, var hasDel: Boolean):
+                ArrayAdapter<Agendamento>(ctx, ressource, Item) {
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

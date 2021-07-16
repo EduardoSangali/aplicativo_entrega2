@@ -1,30 +1,30 @@
 package com.example.appteste1.ui.home
 
-import android.R.attr
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.appteste1.R
 import com.example.appteste1.databinding.FragmentHomeBinding
 import android.widget.ListView
-import android.widget.Toast
-import android.content.Intent
 
-import android.R.attr.button
-import android.R.attr.fragment
-import androidx.navigation.fragment.findNavController
+import android.util.Log
+import com.example.appteste1.model.Agendamento
 import com.example.appteste1.ui.notifications.NotificationsFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
     private lateinit var myAdapter: MyAdapter
 
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var database: DatabaseReference
+
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -44,7 +44,33 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val Items = ArrayList<Procedimento_>()
+        val allAppointments = ArrayList<Agendamento>()
+
+        // get a reference of the database object
+        database = Firebase.database.reference
+        database.child("agendamentos").get().addOnSuccessListener{
+            Log.i("firebase", "Value: " + it.value)
+
+            //create a generic type to be used to extract the data from Firebase
+            val genericTypeIndicator: GenericTypeIndicator<Map<String, Agendamento>> =
+                object : GenericTypeIndicator<Map<String, Agendamento>>() {}
+
+            //The getValue method will convert the JSON string to a hashmap
+            val hashMap: Map<String, Agendamento>? = it.getValue(genericTypeIndicator)
+            if (hashMap != null) {
+                //loop over the map items and add
+                for ((_, agendamento) in hashMap) {
+                    allAppointments.add(agendamento)
+                }
+            }
+
+            val listView: ListView = binding.listview
+            //val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, false, false)
+            val adapter = MyAdapter(requireContext(), R.layout.list_item, allAppointments, true, false, false)
+            listView.adapter = adapter
+        }
+
+        /*val Items = ArrayList<Procedimento_>()
 
 
         Items.add(
@@ -206,6 +232,8 @@ class HomeFragment : Fragment() {
         val listView: ListView = binding.listview
         val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, true, true)
         listView.adapter = adapter
+
+         */
 
 
        /* listView.setOnItemClickListener { listView, view, i, l ->

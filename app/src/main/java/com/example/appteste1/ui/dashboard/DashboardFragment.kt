@@ -12,7 +12,7 @@ import com.example.appteste1.databinding.FragmentDashboardBinding
 
 
 import android.widget.ListView
-import com.example.appteste1.model.Agendamento
+import com.example.appteste1.model.bean.Agendamento
 import com.example.appteste1.ui.home.MyAdapter
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.GenericTypeIndicator

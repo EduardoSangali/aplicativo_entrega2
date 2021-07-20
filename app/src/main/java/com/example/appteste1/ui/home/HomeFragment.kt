@@ -11,7 +11,7 @@ import com.example.appteste1.databinding.FragmentHomeBinding
 import android.widget.ListView
 
 import android.util.Log
-import com.example.appteste1.model.Agendamento
+import com.example.appteste1.model.bean.Agendamento
 import com.example.appteste1.ui.notifications.NotificationsFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.GenericTypeIndicator

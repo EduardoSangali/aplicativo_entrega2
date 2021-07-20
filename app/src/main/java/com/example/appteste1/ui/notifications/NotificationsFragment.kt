@@ -3,7 +3,6 @@ package com.example.appteste1.ui.notifications
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.bluetooth.BluetoothClass.Device
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,9 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.appteste1.R
 import com.example.appteste1.databinding.FragmentNotificationsBinding
-import com.example.appteste1.model.Agendamento
-import com.example.appteste1.model.Procedimento
-import com.example.appteste1.model.Profissional
+import com.example.appteste1.model.bean.Agendamento
+import com.example.appteste1.model.bean.Procedimento
+import com.example.appteste1.model.bean.Profissional
 import com.example.appteste1.ui.home.HomeFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.GenericTypeIndicator
@@ -150,6 +149,7 @@ class NotificationsFragment : Fragment() {
             val agendamento = Agendamento(c.timeInMillis.toString(),
                 binding.mostraDataHora.text.toString(),
                 binding.spinner2.selectedItem.toString(),
+                "", //TODO - Need to get the logged user
                 binding.spinner3.selectedItem.toString(),
                 R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete)
 

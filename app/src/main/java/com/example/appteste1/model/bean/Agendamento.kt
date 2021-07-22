@@ -6,9 +6,7 @@ data class Agendamento(
     val procedim: String,
     val idPaciente: String,
     var profissional: String,
-    var infoId: Int,
-    var editId: Int?,
-    var delId: Int?
+    val dataHoraTS: String
 ){
-    constructor() : this("","", "", "","", 0,0,0)
+    constructor() : this("","", "", "","", "")
 }

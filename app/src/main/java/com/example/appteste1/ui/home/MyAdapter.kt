@@ -12,14 +12,14 @@ import android.widget.Toast
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
 
-class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Agendamento>, var hasInfo: Boolean, var hasEdit: Boolean, var hasDel: Boolean):
-                ArrayAdapter<Agendamento>(ctx, ressource, Item) {
+class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendamento>, var hasInfo: Boolean, var hasEdit: Boolean, var hasDel: Boolean):
+                ArrayAdapter<Agendamento>(ctx, resource, Item) {
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val layoutInflater: LayoutInflater = LayoutInflater.from(ctx)
-        val view: View = layoutInflater.inflate(ressource, null)
+        val view: View = layoutInflater.inflate(resource, null)
 
         //Get items
         val dataProced: TextView = view.findViewById<TextView>(R.id.listaDataHora)
@@ -49,11 +49,6 @@ class MyAdapter(var ctx:Context, var ressource: Int, var Item: ArrayList<Agendam
                 Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
             }
         }
-
-        infoProced.setImageDrawable(ctx.resources.getDrawable(Item[position].infoId))
-        editProced.setImageDrawable(Item[position].editId?.let { ctx.resources.getDrawable(it) })
-        delProced.setImageDrawable(Item[position].delId?.let { ctx.resources.getDrawable(it) })
-
 
         return view
     }

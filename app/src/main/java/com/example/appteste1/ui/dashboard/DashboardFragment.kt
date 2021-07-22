@@ -18,6 +18,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DashboardFragment : Fragment() {
 
@@ -43,10 +46,14 @@ class DashboardFragment : Fragment() {
 
         val allAppointments = ArrayList<Agendamento>()
 
+        val currentDate = Date().time.toString()
+        Log.i("DATE", currentDate)
+
         // get a reference of the database object
         database = Firebase.database.reference
-        database.child("agendamentos").get().addOnSuccessListener{
-            Log.i("firebase", "Value: " + it.value)
+        database.child("agendamentos")
+            .orderByChild("dataHoraTS").endAt(currentDate).get().addOnSuccessListener{
+            Log.i("firebase", "History: " + it.value)
 
             //create a generic type to be used to extract the data from Firebase
             val genericTypeIndicator: GenericTypeIndicator<Map<String, Agendamento>> =
@@ -66,28 +73,6 @@ class DashboardFragment : Fragment() {
             val adapter = MyAdapter(requireContext(), R.layout.list_item, allAppointments, true, false, false)
             listView.adapter = adapter
         }
-
-        /*val Items = ArrayList<Procedimento_>()
-
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "23/04/21 - 14:00", "Fisioterapia",
-                R.drawable.list_info, null, null
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "26/04/21 - 10:15", "Psicólogo",
-                R.drawable.list_info, null, null
-            )
-        )
-
-
-        val listView: ListView = binding.listview
-        val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, false, false)
-        listView.adapter = adapter*/
 
         return root
     }

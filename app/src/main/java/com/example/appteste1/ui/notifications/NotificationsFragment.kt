@@ -38,6 +38,8 @@ class NotificationsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -129,7 +131,8 @@ class NotificationsFragment : Fragment() {
 
             val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in TextView
-                binding.mostraDataHora.text = ("" + dayOfMonth + "/" + month + "/" + year)
+                //Datepicker return the month index, not its actual value, with the indexes starting at 0
+                binding.mostraDataHora.text = ("" + dayOfMonth + "/" + (monthOfYear+1) + "/" + year)
             }, year, month, day )
 
 
@@ -145,13 +148,18 @@ class NotificationsFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener (){
+            var dateStr = binding.mostraDataHora.text.toString()
+            var date = sdf.parse(dateStr)
+
+
             //setting the timestamp as the id of the appointment
             val agendamento = Agendamento(c.timeInMillis.toString(),
                 binding.mostraDataHora.text.toString(),
                 binding.spinner2.selectedItem.toString(),
                 "", //TODO - Need to get the logged user
                 binding.spinner3.selectedItem.toString(),
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete)
+                date.time.toString()
+            )
 
             insertAgendamento(agendamento)
         }

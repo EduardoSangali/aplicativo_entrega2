@@ -12,11 +12,14 @@ import android.widget.ListView
 
 import android.util.Log
 import com.example.appteste1.model.bean.Agendamento
+import com.example.appteste1.model.repository.AppointmentRepository
 import com.example.appteste1.ui.notifications.NotificationsFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
@@ -46,9 +49,12 @@ class HomeFragment : Fragment() {
 
         val allAppointments = ArrayList<Agendamento>()
 
+        val currentDate = Date().time.toString()
+
         // get a reference of the database object
         database = Firebase.database.reference
-        database.child("agendamentos").get().addOnSuccessListener{
+        database.child("agendamentos")
+            .orderByChild("dataHoraTS").startAt(currentDate).get().addOnSuccessListener{
             Log.i("firebase", "Value: " + it.value)
 
             //create a generic type to be used to extract the data from Firebase
@@ -70,175 +76,6 @@ class HomeFragment : Fragment() {
             listView.adapter = adapter
         }
 
-        /*val Items = ArrayList<Procedimento_>()
-
-
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "23/04/21 - 14:00", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "26/04/21 - 10:15", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "12/05/21 - 11:45", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "25/05/21 - 08:15", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "01/06/21 - 16:15", "Pilates",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "10/06/21 - 12:45", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "29/07/21 - 08:30", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "30/07/21 - 11:15", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "23/04/21 - 14:00", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "26/04/21 - 10:15", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "12/05/21 - 11:45", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "25/05/21 - 08:15", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "01/06/21 - 16:15", "Pilates",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "10/06/21 - 12:45", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "29/07/21 - 08:30", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "30/07/21 - 11:15", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "23/04/21 - 14:00", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "26/04/21 - 10:15", "Psicólogo",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "12/05/21 - 11:45", "Personal Trainer",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "25/05/21 - 08:15", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "01/06/21 - 16:15", "Pilates",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-        Items.add(
-            Procedimento_(
-                "645644645",
-                "10/06/21 - 12:45", "Fisioterapia",
-                R.drawable.list_info, R.drawable.list_edit, R.drawable.list_delete
-            )
-        )
-
-
-        val listView: ListView = binding.listview
-        val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, true, true)
-        listView.adapter = adapter
-
-         */
-
-
-       /* listView.setOnItemClickListener { listView, view, i, l ->
-            Toast.makeText(requireContext(), "Você clicou em ${Items[i].procedim}", Toast.LENGTH_SHORT).show()
-        }*/
         binding.floatingActionButton.setOnClickListener(View.OnClickListener {
              replaceTest(NotificationsFragment())
         })

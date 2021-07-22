@@ -1,6 +1,7 @@
 package com.example.appteste1.ui.home
 
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,15 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import java.lang.StringBuilder
 
 class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendamento>, var hasInfo: Boolean, var hasEdit: Boolean, var hasDel: Boolean):
                 ArrayAdapter<Agendamento>(ctx, resource, Item) {
-
+    private lateinit var database: DatabaseReference
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -32,9 +38,34 @@ class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendame
         dataProced.text = Item[position].dataHora
         nomeProced.text = Item[position].procedim
 
+        val appointmentID = Item[position].id
+
+        database = Firebase.database.reference
+
         if(hasInfo) {
             infoProced.setOnClickListener(){
-                Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
+                database.child("agendamentos").child(appointmentID).get().addOnSuccessListener {
+                    val genericTypeIndicator: GenericTypeIndicator<Agendamento> =
+                        object : GenericTypeIndicator<Agendamento>() {}
+
+                    var appointment : Agendamento? = it.getValue(genericTypeIndicator)
+
+                    var message = StringBuilder()
+                    if(appointment != null) {
+                        message.append("Seu atendimento está agendado para \n")
+                        message.append(appointment.dataHora + "\n")
+                        message.append("com o profissional "+ appointment.profissional + "\n")
+                        message.append("para a realização de " + appointment.procedim)
+                    }
+
+                    val builder = AlertDialog.Builder(ctx)
+                    builder.setTitle("Agendamento")
+                    builder.setMessage(message.toString())
+                        .setCancelable(false)
+                        .setPositiveButton("OK") { dialog, id -> dialog.dismiss() }
+                    val alert = builder.create()
+                    alert.show()
+                }
             }
         }
 

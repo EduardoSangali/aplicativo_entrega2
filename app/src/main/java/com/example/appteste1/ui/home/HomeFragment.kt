@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
 
             val listView: ListView = binding.listview
             //val adapter = MyAdapter(requireContext(), R.layout.list_item, Items, true, false, false)
-            val adapter = MyAdapter(requireContext(), R.layout.list_item, allAppointments, true, false, false)
+            val adapter = MyAdapter(requireContext(), R.layout.list_item, allAppointments, true, true, true)
             listView.adapter = adapter
         }
 

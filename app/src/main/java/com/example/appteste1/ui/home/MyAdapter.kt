@@ -3,6 +3,8 @@ package com.example.appteste1.ui.home
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.transition.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +45,7 @@ class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendame
         database = Firebase.database.reference
 
         if(hasInfo) {
+            //TODO - mostra as informações mas o layout está muito sujo
             infoProced.setOnClickListener(){
                 database.child("agendamentos").child(appointmentID).get().addOnSuccessListener {
                     val genericTypeIndicator: GenericTypeIndicator<Agendamento> =
@@ -67,18 +70,39 @@ class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendame
                     alert.show()
                 }
             }
+        }else{
+            infoProced.visibility = View.GONE
         }
 
         if(hasEdit) {
             editProced.setOnClickListener(){
                 Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
             }
+        }else{
+            editProced.visibility = View.GONE
         }
 
         if(hasDel) {
+            //TODO - está excluindo mas a lista não é atualizada precisa ter algum listener ou observer
             delProced.setOnClickListener(){
-                Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(ctx)
+                builder.setTitle("Agendamento")
+                builder.setMessage("Cancelar Agendamento?")
+                    .setCancelable(true)
+                    .setPositiveButton("OK") { dialog, id ->
+                        dialog.dismiss()
+                        database.child("agendamentos").child(appointmentID).removeValue().addOnSuccessListener {
+                            Toast.makeText(ctx, "Agendamento cancelado.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .setNegativeButton("Cancel") { dialog, id ->
+                        dialog.cancel()
+                    }
+                val alert = builder.create()
+                alert.show()
             }
+        }else{
+            delProced.visibility = View.GONE
         }
 
         return view

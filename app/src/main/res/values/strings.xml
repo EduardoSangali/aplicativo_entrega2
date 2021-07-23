@@ -2,7 +2,8 @@
     <string name="app_name">App Domiciliar</string>
     <string name="title_home">Agendamentos</string>
     <string name="title_dashboard">Histórico</string>
-    <string name="title_notifications">Contato</string>
+    <string name="title_notifications">Cadastro</string>
+    <string name="title_contato">Contato</string>
 
     <string-array name="especialidades">
         <item></item>

@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:text="Inclusão de Agendamento"
+            android:text="Cadastro de Agendamento"
             android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

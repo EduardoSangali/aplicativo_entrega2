@@ -14,6 +14,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.appteste1.R
 import com.example.appteste1.databinding.FragmentNotificationsBinding
 import com.example.appteste1.model.bean.Agendamento
@@ -65,7 +66,7 @@ class NotificationsFragment : Fragment() {
         val appointmentID = arguments?.getString("appointmentID")
         Log.i("NotificationsFragment", "appointmentID: "+appointmentID)
 
-        // if appointment ID is not null we are on teh update screen
+        // if appointment ID is not null we are on the update screen
         if(appointmentID != null){
             database.child("agendamentos").child(appointmentID).get().addOnSuccessListener {
                 val genericTypeIndicator: GenericTypeIndicator<Agendamento> =
@@ -86,7 +87,7 @@ class NotificationsFragment : Fragment() {
 
 
             //setting the timestamp as the id of the appointment
-            val agendamento = Agendamento(Calendar.getInstance().timeInMillis.toString(),
+            var appointment = Agendamento(Calendar.getInstance().timeInMillis.toString(),
                 binding.mostraDataHora.text.toString(),
                 binding.spinner2.selectedItem.toString(),
                 "", //TODO - Need to get the logged user
@@ -94,7 +95,12 @@ class NotificationsFragment : Fragment() {
                 date.time.toString()
             )
 
-            saveAppointment(agendamento)
+            if(appointmentID != null){
+                appointment.id = appointmentID
+                updateAppointment(appointment, root)
+            }else{
+                insertAppointment(appointment, root)
+            }
         }
 
         cancelBtn.setOnClickListener(){
@@ -123,11 +129,12 @@ class NotificationsFragment : Fragment() {
         _binding = null
     }
 
-    fun saveAppointment(agendamento: Agendamento){
-        database.child("agendamentos").child(agendamento.id).setValue(agendamento)
+    fun insertAppointment(appointment: Agendamento, view: View){
+        database.child("agendamentos").child(appointment.id).setValue(appointment)
             .addOnSuccessListener {
                 Log.i("firebase","Successfully inserted.")
                 showAlert("Agendamento de Consulta", "Agendamento Realizado!")
+                Navigation.findNavController(view).navigate(R.id.navigation_home)
             }
             .addOnFailureListener {
                 Log.e("firebase", "Error writing data", it)
@@ -135,7 +142,22 @@ class NotificationsFragment : Fragment() {
             }
     }
 
-    fun showAlert(title: String, message: String, buttonText: String = "OK") {
+    private fun updateAppointment(appointment: Agendamento, view: View){
+        val map = appointment.toMap()
+
+        database.child("agendamentos").child(appointment.id).updateChildren(map as Map<String, Any>)
+            .addOnSuccessListener {
+                Log.i("firebase","Successfully inserted.")
+                showAlert("Agendamento de Consulta", "Alteração Realizada!")
+                Navigation.findNavController(view).navigate(R.id.navigation_home)
+            }
+            .addOnFailureListener {
+                Log.e("firebase", "Error writing data", it)
+                showAlert("Agendamento de Consulta", "Não foi possível alterar agendamento.")
+            }
+    }
+
+    private fun showAlert(title: String, message: String, buttonText: String = "OK") {
         val builder =
             AlertDialog.Builder(requireContext())
         builder.setTitle(title)
@@ -148,7 +170,7 @@ class NotificationsFragment : Fragment() {
         alert.show()
     }
 
-    fun loadProcedures(proceduresSelectBox : Spinner){
+    private fun loadProcedures(proceduresSelectBox : Spinner){
         // get a reference of the database object
         database = Firebase.database.reference
 
@@ -183,7 +205,7 @@ class NotificationsFragment : Fragment() {
         }
     }
 
-    fun loadProfessionals(professionalsSelectBox : Spinner){
+    private fun loadProfessionals(professionalsSelectBox : Spinner){
         database = Firebase.database.reference
         database.child("profissionais").get().addOnSuccessListener{
             Log.i("firebase", "Value: " + it.value)
@@ -217,7 +239,7 @@ class NotificationsFragment : Fragment() {
         }
     }
 
-    fun loadDateTime(mPickTimeBtn : ImageView, dateTimeField : TextView){
+    private fun loadDateTime(mPickTimeBtn : ImageView, dateTimeField : TextView){
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -246,12 +268,13 @@ class NotificationsFragment : Fragment() {
         }
     }
 
-    fun setSelectValue(selectBox: Spinner, value : String){
+    private fun setSelectValue(selectBox: Spinner, value : String){
         val adapter = selectBox.adapter
         val size = adapter.count
-        for(i in 0 until (size - 1)){
-            if(value.equals(adapter.getItem(i))){
+        for(i in 0 until size){
+            if(value == adapter.getItem(i)){
                 selectBox.setSelection(i)
+                break
             }
         }
     }

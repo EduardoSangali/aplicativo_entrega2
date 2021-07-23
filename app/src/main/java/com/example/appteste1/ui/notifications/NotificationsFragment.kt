@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.appteste1.R
@@ -51,100 +53,31 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // get a reference of the database object
-        database = Firebase.database.reference
-
-        database.child("procedimentos").get().addOnSuccessListener{
-            Log.i("firebase", "Value: " + it.value)
-
-            val allProcedureNames = ArrayList<String>()
-            allProcedureNames.add("Selecione um procedimento")
-
-            //create a generic type to be used to extract the data from Firebase
-            val genericTypeIndicator: GenericTypeIndicator<List<Procedimento>> =
-                object : GenericTypeIndicator<List<Procedimento>>() {}
-
-            //The getValue method will convert the JSON string to a list
-            val list: List<Procedimento>? = it.getValue(genericTypeIndicator)
-            if (list != null) {
-                for (procedure in list){
-                    allProcedureNames.add(procedure.nome)
-                }
-            }
-
-            val spinner: Spinner = binding.spinner2
-            val arrayAdapter = ArrayAdapter(requireContext(),
-                                    R.layout.color_spinner_layout,
-                                    allProcedureNames)
-                                .also { adapter ->
-                                    // Specify the layout to use when the list of choices appears
-                                    adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
-                                    // Apply the adapter to the spinner
-                                    spinner.adapter = adapter
-                                }
-
-        }
-
-        database.child("profissionais").get().addOnSuccessListener{
-            Log.i("firebase", "Value: " + it.value)
-
-            val allProfessionalNames = ArrayList<String>()
-            allProfessionalNames.add("Selecione um profissional")
-
-            //create a generic type to be used to extract the data from Firebase
-            val genericTypeIndicator: GenericTypeIndicator<List<Profissional>> =
-                object : GenericTypeIndicator<List<Profissional>>() {}
-
-            //The getValue method will convert the JSON string to a list
-            val list: List<Profissional>? = it.getValue(genericTypeIndicator)
-            if (list != null) {
-                for (professional in list){
-                    allProfessionalNames.add(professional.nome)
-                }
-            }
-
-            val spinner3: Spinner = binding.spinner3
-            val arrayAdapter = ArrayAdapter(requireContext(),
-                R.layout.color_spinner_layout,
-                allProfessionalNames)
-                .also { adapter ->
-                    // Specify the layout to use when the list of choices appears
-                    adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
-                    // Apply the adapter to the spinner
-                    spinner3.adapter = adapter
-                }
-
-        }
+        loadProcedures(binding.spinner2)
+        loadProfessionals(binding.spinner3)
 
         val mPickTimeBtn = binding.pickDateBtn
         val cancelBtn = binding.deletar
         val saveBtn = binding.enviar
 
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        val hour = c.get(Calendar.HOUR)
-        val minute = c.get(Calendar.MINUTE)
+        loadDateTime(mPickTimeBtn, binding.mostraDataHora)
 
-        mPickTimeBtn.setOnClickListener {
+        val appointmentID = arguments?.getString("appointmentID")
+        Log.i("NotificationsFragment", "appointmentID: "+appointmentID)
 
-            val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                // Display Selected date in TextView
-                //Datepicker return the month index, not its actual value, with the indexes starting at 0
-                binding.mostraDataHora.text = ("" + dayOfMonth + "/" + (monthOfYear+1) + "/" + year)
-            }, year, month, day )
+        // if appointment ID is not null we are on teh update screen
+        if(appointmentID != null){
+            database.child("agendamentos").child(appointmentID).get().addOnSuccessListener {
+                val genericTypeIndicator: GenericTypeIndicator<Agendamento> =
+                    object : GenericTypeIndicator<Agendamento>() {}
 
-
-            val dph = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                c.set(Calendar.HOUR_OF_DAY, hour)
-                c.set(Calendar.MINUTE, minute)
-                binding.mostraDataHora.append(SimpleDateFormat(" HH:mm").format(c.time))
+                var appointment: Agendamento? = it.getValue(genericTypeIndicator)
+                if (appointment != null) {
+                    binding.mostraDataHora.text = appointment.dataHora
+                    setSelectValue(binding.spinner2, appointment.procedim)
+                    setSelectValue(binding.spinner3, appointment.profissional)
+                }
             }
-            TimePickerDialog(requireContext(), dph, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show()
-
-            dpd.show()
-
         }
 
         saveBtn.setOnClickListener (){
@@ -153,7 +86,7 @@ class NotificationsFragment : Fragment() {
 
 
             //setting the timestamp as the id of the appointment
-            val agendamento = Agendamento(c.timeInMillis.toString(),
+            val agendamento = Agendamento(Calendar.getInstance().timeInMillis.toString(),
                 binding.mostraDataHora.text.toString(),
                 binding.spinner2.selectedItem.toString(),
                 "", //TODO - Need to get the logged user
@@ -161,7 +94,7 @@ class NotificationsFragment : Fragment() {
                 date.time.toString()
             )
 
-            insertAgendamento(agendamento)
+            saveAppointment(agendamento)
         }
 
         cancelBtn.setOnClickListener(){
@@ -185,13 +118,12 @@ class NotificationsFragment : Fragment() {
 
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    fun insertAgendamento(agendamento: Agendamento){
+    fun saveAppointment(agendamento: Agendamento){
         database.child("agendamentos").child(agendamento.id).setValue(agendamento)
             .addOnSuccessListener {
                 Log.i("firebase","Successfully inserted.")
@@ -214,5 +146,113 @@ class NotificationsFragment : Fragment() {
             }
         val alert = builder.create()
         alert.show()
+    }
+
+    fun loadProcedures(proceduresSelectBox : Spinner){
+        // get a reference of the database object
+        database = Firebase.database.reference
+
+        database.child("procedimentos").get().addOnSuccessListener{
+            Log.i("firebase", "Value: " + it.value)
+
+            val allProcedureNames = ArrayList<String>()
+            allProcedureNames.add("Selecione um procedimento")
+
+            //create a generic type to be used to extract the data from Firebase
+            val genericTypeIndicator: GenericTypeIndicator<List<Procedimento>> =
+                object : GenericTypeIndicator<List<Procedimento>>() {}
+
+            //The getValue method will convert the JSON string to a list
+            val list: List<Procedimento>? = it.getValue(genericTypeIndicator)
+            if (list != null) {
+                for (procedure in list){
+                    allProcedureNames.add(procedure.nome)
+                }
+            }
+
+            val spinner: Spinner = proceduresSelectBox
+            val arrayAdapter = ArrayAdapter(requireContext(),
+                R.layout.color_spinner_layout,
+                allProcedureNames)
+                .also { adapter ->
+                    // Specify the layout to use when the list of choices appears
+                    adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
+                    // Apply the adapter to the spinner
+                    spinner.adapter = adapter
+                }
+        }
+    }
+
+    fun loadProfessionals(professionalsSelectBox : Spinner){
+        database = Firebase.database.reference
+        database.child("profissionais").get().addOnSuccessListener{
+            Log.i("firebase", "Value: " + it.value)
+
+            val allProfessionalNames = ArrayList<String>()
+            allProfessionalNames.add("Selecione um profissional")
+
+            //create a generic type to be used to extract the data from Firebase
+            val genericTypeIndicator: GenericTypeIndicator<List<Profissional>> =
+                object : GenericTypeIndicator<List<Profissional>>() {}
+
+            //The getValue method will convert the JSON string to a list
+            val list: List<Profissional>? = it.getValue(genericTypeIndicator)
+            if (list != null) {
+                for (professional in list){
+                    allProfessionalNames.add(professional.nome)
+                }
+            }
+
+            val spinner3: Spinner = professionalsSelectBox
+            val arrayAdapter = ArrayAdapter(requireContext(),
+                R.layout.color_spinner_layout,
+                allProfessionalNames)
+                .also { adapter ->
+                    // Specify the layout to use when the list of choices appears
+                    adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
+                    // Apply the adapter to the spinner
+                    spinner3.adapter = adapter
+                }
+
+        }
+    }
+
+    fun loadDateTime(mPickTimeBtn : ImageView, dateTimeField : TextView){
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val hour = c.get(Calendar.HOUR)
+        val minute = c.get(Calendar.MINUTE)
+
+        mPickTimeBtn.setOnClickListener {
+
+            val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                // Display Selected date in TextView
+                //Datepicker return the month index, not its actual value, with the indexes starting at 0
+                dateTimeField.text = ("" + dayOfMonth + "/" + (monthOfYear+1) + "/" + year)
+            }, year, month, day )
+
+
+            val dph = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                c.set(Calendar.HOUR_OF_DAY, hour)
+                c.set(Calendar.MINUTE, minute)
+                dateTimeField.append(SimpleDateFormat(" HH:mm").format(c.time))
+            }
+            TimePickerDialog(requireContext(), dph, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show()
+
+            dpd.show()
+
+        }
+    }
+
+    fun setSelectValue(selectBox: Spinner, value : String){
+        val adapter = selectBox.adapter
+        val size = adapter.count
+        for(i in 0 until (size - 1)){
+            if(value.equals(adapter.getItem(i))){
+                selectBox.setSelection(i)
+            }
+        }
     }
 }

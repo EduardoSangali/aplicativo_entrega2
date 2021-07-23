@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
 import com.google.firebase.database.DatabaseReference
@@ -76,7 +78,9 @@ class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendame
 
         if(hasEdit) {
             editProced.setOnClickListener(){
-                Toast.makeText(ctx, Item[position].id, Toast.LENGTH_SHORT).show()
+                //redirect to insert/update form passing the appointment ID as argument
+                val bundle = bundleOf("appointmentID" to appointmentID)
+                Navigation.findNavController(view).navigate(R.id.navigation_notifications, bundle)
             }
         }else{
             editProced.visibility = View.GONE

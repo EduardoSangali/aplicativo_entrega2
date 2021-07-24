@@ -255,6 +255,9 @@ class NotificationsFragment : Fragment() {
                 dateTimeField.text = ("" + dayOfMonth + "/" + (monthOfYear+1) + "/" + year)
             }, year, month, day )
 
+            // set the minimum date to today, the past dates are blocked
+            dpd.datePicker.minDate = System.currentTimeMillis() - 1000
+
 
             val dph = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 c.set(Calendar.HOUR_OF_DAY, hour)

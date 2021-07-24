@@ -2,14 +2,16 @@ package com.example.appteste1
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.appteste1.databinding.ActivityMainBinding
+import com.example.appteste1.ui.contacts.ContactsFragment
 import com.example.appteste1.ui.login.LoginActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -37,9 +39,10 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard
+                R.id.navigation_appointments, R.id.navigation_history, R.id.navigation_contacts
             )
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
@@ -52,5 +55,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun showContactsDialog() {
+        val fm: FragmentManager = supportFragmentManager
+        val alertDialog: ContactsFragment = ContactsFragment()
+        alertDialog.show(fm, "fragment_alert")
     }
 }

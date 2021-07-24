@@ -1,4 +1,4 @@
-package com.example.appteste1.ui.history
+package com.example.appteste1.ui.appointment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
-import com.example.appteste1.ui.appointment.AppointmentListAdapter
-import com.example.appteste1.ui.appointment.AppointmentViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class HistoryFragment: Fragment(){
+class AppointmentFragment : Fragment() {
+
     private lateinit var adapter: AppointmentListAdapter
     private lateinit var viewModel: AppointmentViewModel
 
@@ -27,7 +28,7 @@ class HistoryFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.i("HISTORY FRAGMENT", "onCreateView -> START")
+        Log.i("APPOINTMENT FRAGMENT", "onCreateView -> START")
         return layoutInflater.inflate(R.layout.fragment_appointment, container, false);
     }
 
@@ -36,12 +37,12 @@ class HistoryFragment: Fragment(){
      * and start the observer
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
-        Log.i("HISTORY FRAGMENT", "VIEW CREATED. POPULATING DATA...")
+        Log.i("APPOINTMENT FRAGMENT", "VIEW CREATED. POPULATING DATA...")
         viewModel =
             ViewModelProvider(this).get(AppointmentViewModel::class.java)
 
         // Create the adapter
-        adapter = AppointmentListAdapter(requireContext(), R.layout.list_item, ArrayList<Agendamento>() ,true, false, false, viewModel)
+        adapter = AppointmentListAdapter(requireContext(), R.layout.list_item, ArrayList<Agendamento>() ,true, true, true, viewModel)
 
         // Get the list view and associate the adapter with it
         val listView = view.findViewById<ListView>(R.id.listview)
@@ -57,9 +58,14 @@ class HistoryFragment: Fragment(){
 
         // Associate the observer with the appointments list present in the view model
         viewModel.appointmentList.observe(viewLifecycleOwner, observer)
-        viewModel.loadAppointmentsHistory(requireContext())
+        viewModel.loadAppointmentsList(requireContext())
 
-        Log.i("HISTORY FRAGMENT", "VIEW CREATED. DATA POPULATED.")
+        // Get the floating button and add a click listener to it
+        val floatingActionButton : FloatingActionButton = view.findViewById(R.id.floatingActionButton)
+        floatingActionButton.setOnClickListener(View.OnClickListener {
+            Navigation.findNavController(it).navigate(R.id.navigation_save_appointment)
+        })
+
+        Log.i("APPOINTMENT FRAGMENT", "VIEW CREATED. DATA POPULATED.")
     }
 }
-

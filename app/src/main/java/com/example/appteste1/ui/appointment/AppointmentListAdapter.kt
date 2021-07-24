@@ -1,10 +1,7 @@
-package com.example.appteste1.ui.home
-
+package com.example.appteste1.ui.appointment
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import android.transition.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
@@ -22,8 +20,15 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.lang.StringBuilder
 
-class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendamento>, var hasInfo: Boolean, var hasEdit: Boolean, var hasDel: Boolean):
-                ArrayAdapter<Agendamento>(ctx, resource, Item) {
+class AppointmentListAdapter (var ctx:Context,
+                              var resource: Int,
+                              var list: ArrayList<Agendamento>,
+                              var hasInfo: Boolean,
+                              var hasEdit: Boolean,
+                              var hasDel: Boolean,
+                              var viewModel: AppointmentViewModel):  ArrayAdapter<Agendamento>(ctx, resource, list) {
+
+
     private lateinit var database: DatabaseReference
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -39,10 +44,10 @@ class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendame
         val delProced: ImageView = view.findViewById<ImageView>(R.id.listDelete)
 
         //Set items
-        dataProced.text = Item[position].dataHora
-        nomeProced.text = Item[position].procedim
+        dataProced.text = list[position].dataHora
+        nomeProced.text = list[position].procedim
 
-        val appointmentID = Item[position].id
+        val appointmentID = list[position].id
 
         database = Firebase.database.reference
 
@@ -80,14 +85,13 @@ class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendame
             editProced.setOnClickListener(){
                 //redirect to insert/update form passing the appointment ID as argument
                 val bundle = bundleOf("appointmentID" to appointmentID)
-                Navigation.findNavController(view).navigate(R.id.navigation_notifications, bundle)
+                Navigation.findNavController(view).navigate(R.id.navigation_save_appointment, bundle)
             }
         }else{
             editProced.visibility = View.GONE
         }
 
         if(hasDel) {
-            //TODO - está excluindo mas a lista não é atualizada precisa ter algum listener ou observer
             delProced.setOnClickListener(){
                 val builder = AlertDialog.Builder(ctx)
                 builder.setTitle("Agendamento")
@@ -95,9 +99,7 @@ class MyAdapter(var ctx:Context, var resource: Int, var Item: ArrayList<Agendame
                     .setCancelable(true)
                     .setPositiveButton("OK") { dialog, id ->
                         dialog.dismiss()
-                        database.child("agendamentos").child(appointmentID).removeValue().addOnSuccessListener {
-                            Toast.makeText(ctx, "Agendamento cancelado.", Toast.LENGTH_SHORT).show()
-                        }
+                        viewModel.deleteAppointment(appointmentID, ctx)
                     }
                     .setNegativeButton("Cancel") { dialog, id ->
                         dialog.cancel()

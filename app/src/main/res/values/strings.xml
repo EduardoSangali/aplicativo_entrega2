@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">App Domiciliar</string>
+    <string name="title_appointments">Agendamentos</string>
+    <string name="title_history">Histórico</string>
+    <string name="title_save_appointment">Cadastro</string>
+    <string name="title_contato">Contato</string>
+
+    <string-array name="especialidades">
+        <item></item>
+        <item>Fisioterapia</item>
+        <item>Personal Trainer</item>
+        <item>Psicólogo</item>
+    </string-array>
+
+    <string-array name="profissional">
+        <item></item>
+        <item>Ana</item>
+        <item>Jorge</item>
+        <item>Pedro</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

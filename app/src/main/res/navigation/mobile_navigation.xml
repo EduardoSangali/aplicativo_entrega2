@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_appointments">
+
+    <fragment
+        android:id="@+id/navigation_appointments"
+        android:name="com.example.appteste1.ui.appointment.AppointmentFragment"
+        android:label="@string/title_appointments"
+        tools:layout="@layout/fragment_appointment" />
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.example.appteste1.ui.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_appointment" />
+
+    <fragment
+        android:id="@+id/navigation_save_appointment"
+        android:name="com.example.appteste1.ui.appointment.SaveAppointmentFragment"
+        android:label="@string/title_save_appointment"
+        tools:layout="@layout/fragment_saveappointment">
+        <argument
+            android:name="appointmentID"
+            app:argType="string"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_contacts"
+        android:name="com.example.appteste1.ui.contacts.ContactsFragment"
+        android:label="@string/title_contato"
+        tools:layout="@layout/fragment_contacts"/>
+</navigation>

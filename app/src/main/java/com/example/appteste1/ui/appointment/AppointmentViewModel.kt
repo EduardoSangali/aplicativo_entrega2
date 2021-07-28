@@ -2,14 +2,18 @@ package com.example.appteste1.ui.appointment
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
+import com.example.appteste1.ui.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ktx.database
@@ -19,6 +23,7 @@ import kotlin.collections.ArrayList
 
 class AppointmentViewModel : ViewModel(){
     private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     val appointment = MutableLiveData<Agendamento>()
     private lateinit var _appointment : Agendamento
@@ -144,6 +149,11 @@ class AppointmentViewModel : ViewModel(){
             }
             refreshMutableList()
         }
+    }
+
+    fun logout(view: View) {
+        auth = FirebaseAuth.getInstance()
+        auth.signOut();
     }
 
     private fun showAlert(title: String, message: String, buttonText: String = "OK", ctx: Context) {

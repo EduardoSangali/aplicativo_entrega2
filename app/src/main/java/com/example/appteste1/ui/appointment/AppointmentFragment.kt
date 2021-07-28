@@ -1,10 +1,12 @@
 package com.example.appteste1.ui.appointment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -67,5 +69,23 @@ class AppointmentFragment : Fragment() {
         })
 
         Log.i("APPOINTMENT FRAGMENT", "VIEW CREATED. DATA POPULATED.")
+
+        //logout
+        var btn_logout: ImageView = view.findViewById<ImageView>(R.id.imageButton3)
+        btn_logout.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Sair")
+            builder.setMessage("Você realmente deseja sair do aplicativo?")
+                .setCancelable(true)
+                .setPositiveButton("OK") { dialog, id ->
+                    dialog.dismiss()
+                    viewModel.logout(view);
+                }
+                .setNegativeButton("Cancel") { dialog, id ->
+                    dialog.cancel()
+                }
+            val alert = builder.create()
+            alert.show()
+        }
     }
 }

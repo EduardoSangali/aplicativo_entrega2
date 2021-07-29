@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +15,7 @@ import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
 import com.example.appteste1.ui.appointment.AppointmentListAdapter
 import com.example.appteste1.ui.appointment.AppointmentViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HistoryFragment: Fragment(){
     private lateinit var adapter: AppointmentListAdapter
@@ -54,6 +57,9 @@ class HistoryFragment: Fragment(){
             adapter.addAll(newList)
             adapter.notifyDataSetChanged()
         }
+        val floatingBtn: FloatingActionButton = view.findViewById<FloatingActionButton>(R.id.floatingActionButton)
+        floatingBtn.setVisibility(View.INVISIBLE)
+
 
         // Associate the observer with the appointments list present in the view model
         viewModel.appointmentList.observe(viewLifecycleOwner, observer)

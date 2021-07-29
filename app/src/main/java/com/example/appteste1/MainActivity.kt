@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             var dialog = ContactsFragment()
             dialog.show(supportFragmentManager, "contactDialog")
         }
+
     }
 
     public override fun onStart() {

@@ -41,7 +41,7 @@ class ContactsFragment : DialogFragment() {
             startActivity(i)
         }
         telephone_Contact.setOnClickListener(){
-            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode("12345678")))
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode("+551112345678")))
             startActivity(intent)
         }
         mail_Contact.setOnClickListener(){

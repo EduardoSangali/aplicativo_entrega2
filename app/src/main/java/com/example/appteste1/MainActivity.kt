@@ -11,12 +11,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.appteste1.databinding.ActivityMainBinding
 import com.example.appteste1.ui.contacts.ContactsFragment
 import com.example.appteste1.ui.login.LoginActivity
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
+    private lateinit var btn: BottomNavigationItemView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,13 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        //Set listener to Contacts menu and open the dialog
+        btn = findViewById(R.id.navigation_contacts)
+        btn.setOnClickListener(){
+            var dialog = ContactsFragment()
+            dialog.show(supportFragmentManager, "contactDialog")
+        }
     }
 
     public override fun onStart() {

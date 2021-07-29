@@ -35,7 +35,7 @@ class ContactsFragment : DialogFragment() {
             dismiss()
         }
         whatsApp_Contact.setOnClickListener(){
-            val url = "https://api.whatsapp.com/send?phone=+5515997690950"
+            val url = "https://api.whatsapp.com/send?phone=+551112345678"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
@@ -45,8 +45,8 @@ class ContactsFragment : DialogFragment() {
             startActivity(intent)
         }
         mail_Contact.setOnClickListener(){
-            val recipient = "eduardo.sangali@gmail.com"
-            val subject = "Mensagem vinda do aplicativo"
+            val recipient = "contato.clintech@clintech.com.br"
+            val subject = "Mensagem vinda do aplicativo Clintech"
             val message = "Olá! Gostaria de entrar em contato com vocês!"
 
             sendEmail(recipient, subject, message)

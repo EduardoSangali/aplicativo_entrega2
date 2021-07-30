@@ -1,7 +1,5 @@
 package com.example.appteste1.ui.appointment
 
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
-import com.example.appteste1.ui.login.LoginActivity
+import com.example.appteste1.ui.login.LogoutListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AppointmentFragment : Fragment() {
@@ -74,21 +72,6 @@ class AppointmentFragment : Fragment() {
 
         //logout
         var btn_logout: ImageView = view.findViewById<ImageView>(R.id.imageButton3)
-        btn_logout.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Sair")
-            builder.setMessage("Você realmente deseja sair do aplicativo?")
-                .setCancelable(true)
-                .setPositiveButton("OK") { dialog, id ->
-                    dialog.dismiss()
-                    viewModel.logout(view);
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
-                }
-                .setNegativeButton("Cancel") { dialog, id ->
-                    dialog.cancel()
-                }
-            val alert = builder.create()
-            alert.show()
-        }
+        btn_logout.setOnClickListener(LogoutListener())
     }
 }

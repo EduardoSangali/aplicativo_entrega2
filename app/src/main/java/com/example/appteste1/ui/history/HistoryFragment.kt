@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
 import com.example.appteste1.ui.appointment.AppointmentListAdapter
 import com.example.appteste1.ui.appointment.AppointmentViewModel
+import com.example.appteste1.ui.login.LogoutListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HistoryFragment: Fragment(){
@@ -66,6 +68,10 @@ class HistoryFragment: Fragment(){
         viewModel.loadAppointmentsHistory(requireContext())
 
         Log.i("HISTORY FRAGMENT", "VIEW CREATED. DATA POPULATED.")
+
+        //logout
+        var btn_logout: ImageView = view.findViewById<ImageView>(R.id.imageButton3)
+        btn_logout.setOnClickListener(LogoutListener())
     }
 }
 

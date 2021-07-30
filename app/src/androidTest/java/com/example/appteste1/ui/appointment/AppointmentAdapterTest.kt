@@ -1,15 +1,13 @@
-package com.example.appteste1
+package com.example.appteste1.ui.appointment
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
-import com.example.appteste1.ui.appointment.AppointmentListAdapter
-import com.example.appteste1.ui.appointment.AppointmentViewModel
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +17,7 @@ import org.junit.Before
 
 
 @RunWith(AndroidJUnit4::class)
-class AppointmentAdapterInstrumentedTest {
+class AppointmentAdapterTest {
     lateinit var mAdapter : AppointmentListAdapter
 
     lateinit var viewModel: AppointmentViewModel
@@ -40,7 +38,8 @@ class AppointmentAdapterInstrumentedTest {
         agendamento2 = Agendamento("9853124","25/08/2021 11:30", "Acupuntura", "teste","Dr. João Miguel Saran", "12546953")
         data.add(agendamento1)
         data.add(agendamento2)
-        mAdapter = AppointmentListAdapter(appContext, R.layout.list_item, data, false, false, false, viewModel)
+        mAdapter = AppointmentListAdapter(appContext,
+            R.layout.list_item, data, false, false, false, viewModel)
     }
 
     @Test

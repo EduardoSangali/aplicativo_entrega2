@@ -16,12 +16,11 @@ import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
 import com.example.appteste1.ui.professional.ProfessionalViewModel
 import com.example.appteste1.ui.procedure.ProcedureViewModel
+import com.example.appteste1.ui.SpinnerObserver
 import java.text.SimpleDateFormat
 import java.util.*
 
 class SaveAppointmentFragment : Fragment() {
-
-    private lateinit var adapter: AppointmentListAdapter
     private lateinit var viewModel: AppointmentViewModel
     private lateinit var procedureViewModel: ProcedureViewModel
     private lateinit var professionalViewModel: ProfessionalViewModel
@@ -79,29 +78,8 @@ class SaveAppointmentFragment : Fragment() {
             setSelectValue(professionalList, it.profissional)
         })
 
-        procedureViewModel.procedureList.observe(viewLifecycleOwner, Observer{
-            val arrayAdapter = ArrayAdapter(requireContext(),
-                R.layout.color_spinner_layout,
-                it)
-                .also { adapter ->
-                    // Specify the layout to use when the list of choices appears
-                    adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
-                    // Apply the adapter to the spinner
-                    procedureList.adapter = adapter
-                }
-        })
-
-        professionalViewModel.professionalList.observe(viewLifecycleOwner, Observer {
-            val arrayAdapter = ArrayAdapter(requireContext(),
-                R.layout.color_spinner_layout,
-                it)
-                .also { adapter ->
-                    // Specify the layout to use when the list of choices appears
-                    adapter.setDropDownViewResource(R.layout.color_spinner_dropdown_layout)
-                    // Apply the adapter to the spinner
-                    professionalList.adapter = adapter
-                }
-        })
+        procedureViewModel.procedureList.observe(viewLifecycleOwner, SpinnerObserver(requireContext(), procedureList))
+        professionalViewModel.professionalList.observe(viewLifecycleOwner, SpinnerObserver(requireContext(), professionalList))
 
         procedureViewModel.loadProcedures(procedureList, requireContext())
         professionalViewModel.loadProfessionals(professionalList, requireContext())

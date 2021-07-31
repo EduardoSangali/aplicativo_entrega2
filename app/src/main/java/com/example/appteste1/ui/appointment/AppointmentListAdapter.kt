@@ -26,6 +26,7 @@ class AppointmentListAdapter (var ctx:Context,
                               var hasInfo: Boolean,
                               var hasEdit: Boolean,
                               var hasDel: Boolean,
+                              var isHistory: Boolean,
                               var viewModel: AppointmentViewModel):  ArrayAdapter<Agendamento>(ctx, resource, list) {
 
 
@@ -62,10 +63,17 @@ class AppointmentListAdapter (var ctx:Context,
 
                     var message = StringBuilder()
                     if(appointment != null) {
+                        if(isHistory){
+                            message.append("Seu atendimento foi realizado às \n")
+                            message.append(appointment.dataHora + "\n")
+                            message.append("com o profissional "+ appointment.profissional + "\n")
+                            message.append("para a realização de " + appointment.procedim)
+                        }
+                        else{
                         message.append("Seu atendimento está agendado para \n")
                         message.append(appointment.dataHora + "\n")
                         message.append("com o profissional "+ appointment.profissional + "\n")
-                        message.append("para a realização de " + appointment.procedim)
+                        message.append("para a realização de " + appointment.procedim)}
                     }
 
                     val builder = AlertDialog.Builder(ctx)

@@ -66,9 +66,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showContactsDialog() {
-        val fm: FragmentManager = supportFragmentManager
-        val alertDialog: ContactsFragment = ContactsFragment()
-        alertDialog.show(fm, "fragment_alert")
-    }
 }

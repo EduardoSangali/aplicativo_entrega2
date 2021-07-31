@@ -11,13 +11,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.example.appteste1.R
 import com.example.appteste1.model.bean.Agendamento
+import com.example.appteste1.ui.contacts.ContactsFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import androidx.fragment.app.DialogFragment
 import java.lang.StringBuilder
 
 class AppointmentListAdapter (var ctx:Context,
@@ -64,20 +67,22 @@ class AppointmentListAdapter (var ctx:Context,
                     var message = StringBuilder()
                     if(appointment != null) {
                         if(isHistory){
-                            message.append("Seu atendimento foi realizado às \n")
-                            message.append(appointment.dataHora + "\n")
-                            message.append("com o profissional "+ appointment.profissional + "\n")
+                            message.append("Seu atendimento foi realizado dia "+appointment.dataHora.substring(0,9) )
+                            message.append(" às "+appointment.dataHora.substring(10) )
+                            message.append(" com o profissional "+ appointment.profissional + "\n")
                             message.append("para a realização de " + appointment.procedim)
                         }
                         else{
-                        message.append("Seu atendimento está agendado para \n")
-                        message.append(appointment.dataHora + "\n")
-                        message.append("com o profissional "+ appointment.profissional + "\n")
-                        message.append("para a realização de " + appointment.procedim)}
+
+                            message.append("Data: " +appointment.dataHora.substring(0,9) + "\n")
+                        message.append("Hora: " +appointment.dataHora.substring(10) + "\n")
+                        message.append("Profissional: "+ appointment.profissional + "\n")
+                        message.append("Procedimento: " + appointment.procedim)}
                     }
 
-                    val builder = AlertDialog.Builder(ctx)
-                    builder.setTitle("Agendamento")
+
+                    val builder = AlertDialog.Builder(ctx, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT)
+                    builder.setTitle("Detalhes")
                     builder.setMessage(message.toString())
                         .setCancelable(false)
                         .setPositiveButton("OK") { dialog, id -> dialog.dismiss() }

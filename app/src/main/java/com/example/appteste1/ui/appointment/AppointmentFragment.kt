@@ -44,7 +44,13 @@ class AppointmentFragment : Fragment() {
             ViewModelProvider(this).get(AppointmentViewModel::class.java)
 
         // Create the adapter
-        adapter = AppointmentListAdapter(requireContext(), R.layout.list_item, ArrayList<Agendamento>() ,true, true, true, viewModel)
+        adapter = AppointmentListAdapter(requireContext(),
+            R.layout.list_item, ArrayList<Agendamento>() ,
+            true,
+            true,
+            true,
+            false,
+            viewModel)
 
         // Get the list view and associate the adapter with it
         val listView = view.findViewById<ListView>(R.id.listview)
